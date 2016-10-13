@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    
+
+   <script 
+            src="d3.v3.min.js">
+   </script>         
+</head>
+
+ 
+<body> 
+    
+    <svg width = "10000"> </svg>
+    <script>
+//width mi dà l'ampiezza della serie degli istogrammi
+//non mettendo height mi dà quella di default
+        
+        
+        
+d3.csv('athletes_sochi.csv', 
+    function (data) {
+    console.log(data)
+    
+     
+    //coloro gli istogrammi che clicco con il mouse
+        
+//    rects.on('click', function(){
+//        
+//            d3.select(this)
+//            .transition()
+//            .duration(2000)
+//            .attr('fill', 'blue')
+//                         })
+//    
+    
+    var rects = d3.select('svg')
+        .selectAll('rect')
+        .data(data)
+        .enter()
+        .append('rect')
+       // .attr('height', 0)
+        .attr('height', function(d,i) {
+            return d.age
+        })  
+        .attr('width', 5)
+        .attr('x', function(d,i) {
+              return i*6
+              
+               })
+        .attr('y', function(d,i) {
+              return 100-d.age
+              
+            })  
+        .attr('opacity' , 0)
+        
+    rects.transition()
+        .duration(2500)
+        .delay(function (d,i) {
+            return 100*i  
+
+        })
+        .attr('opacity', 1)
+    
+    
+    rects.on('click', function(d,i) {
+        console.log(d)
+        d3.select(this)
+            .attr('fill', 'red')
+        
+    })
+   
+    
+    
+    })  
+       
+//questa parte serve per cambiare da nero a rosso quando clicco sopra la barra
+    //e da rosso a nero quando riclicco sopra la barra
+    
+    
+/*if (d.clicked) {
+    d3.elect(this)
+    .attr('fill', 'black')
+    .d.clicked = false
+} else {d3.elect(this)
+    .attr('fill', 'black')
+    .d.clicked = true
+}
+ */      
+       
+       
+       
+    
+    
+    
+    
+       
+    
+    
+    
+    
+    //enter(): se non trova l'aray va ad append
+    //per ogni oggetto nell'array crea un rect (rettangolo)
+    //per mettere un rettangolo nell'svg devo usare append
+    
+    
+    //console.log(data[0].age)
+    
+//   d3.select('svg')
+//        .selectAll('circle')
+//        .data(data)
+//        .enter()
+//        .append('circle')
+//        .attr('r', function(d,i){
+//            return 2
+//    })
+//        
+//       .attr('cx', function(d,i){
+//            return d.weight *2
+//    }) 
+//        
+//        .attr('cy', function(d,i){
+//            return d.height *100
+//    }) 
+//        
+//        .attr('opacity', .1)
+//        
+//                
+//    })
+
+
+   
+    //console.log('hey')
+    
+    
+    </script>
+    
+    </body>
+    
+</html>
