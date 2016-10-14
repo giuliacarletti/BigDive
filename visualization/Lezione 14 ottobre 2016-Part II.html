@@ -1,0 +1,57 @@
+<html>
+<head>
+   <script 
+            src="d3.v3.min.js">
+    
+    </script> 
+    </head>
+
+<body>
+   <svg> </svg> 
+    
+    <script>
+    
+    var dataset = [3,67,6,8,23,56,8,23,5]
+    
+    
+    // costruisco tanti gruppi quanti sono i datapoint
+    
+    //dentro ogni gruppo metto un rettangolo e un testo
+    
+    var myGroups = d3.select('svg')
+    .selectAll('g')
+    .data(dataset)
+    .enter()
+    .append('g')
+    .attr('transform', function(d,i){
+        return 'translate(' + i*21 + ', 0)'
+    })
+    //i rettangoli sono larghi 10, quindi mettendo 21 li vedo tutti
+    
+    
+    myGroups.append('rect')
+    .attr('width', 20)
+    .attr('height', function(d,i){
+        return d
+    })
+ 
+    .attr('y', 20)
+    
+    myGroups.append('text')
+    .text(function(d,i){
+        return d
+    })
+    .attr('x', 30)
+    .attr('y', 10)
+    
+    
+    
+    
+    
+    
+    
+    </script>
+    </body>
+
+
+</html>

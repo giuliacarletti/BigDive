@@ -1,0 +1,107 @@
+<html>
+<head>
+   <script 
+            src="d3.v3.min.js">
+    
+    </script> 
+    </head>
+
+<body>
+   <svg> </svg> 
+    
+    <script>
+    
+    var dataset = [3,67,6,8,23,56,8,23,5]
+    // var dataset = [{a:3}, {a:56},{a:70}] 
+    //se uso mouse.click (fine codice) non funziona perchè le mie var sono numeri, funzionerebbe con una var con oggetti
+    //per entrare dentro devo fare select.a, cioè l'attributo
+    
+    
+    
+    // costruisco tanti gruppi quanti sono i datapoint
+    
+    //dentro ogni gruppo metto un rettangolo e un testo
+    
+    var myGroups = d3.select('svg')
+    .selectAll('g')
+    .data(dataset)
+    .enter()
+    .append('g')
+    .attr('transform', function(d,i){
+        return 'translate(' + (i*21 +10) + ', ' + (d+10) + ' )'
+    })
+       
+// (d+10) mi trasla tutti i cerchi verso il basso di 10; devo mettere l'espressione tra parentesi, altrim + non lo riconosce    
+   // i*21 + 10 mi ingrandisce di 21 e sposta di 10
+    
+    //translate () mi dice di quanto si spostano la ordinata e l'ascissa del gruppo (d,i)
+    
+    myGroups.append('circle')
+    .attr('r', 0)
+    .transition()
+    .duration(2000)
+    .delay(function(d,i){
+        return 100*i
+    })
+    .attr('r', 5)
+    
+    
+   //non metto cx e cy perchè il gruppo viene centrato in (0,0)
+    
+    myGroups.append('text')
+    .text(function(d,i){
+        return d
+    })
+    //abbasso il testo di 20
+    .attr('y', 20)
+    
+    //per mettere il testo centrato:
+    .attr('text-anchor', 'middle')
+    .text(function(d,i){
+                return d
+            })
+    .attr('opacity',0)
+    
+    //la opacity di default è 1, qui la metto a zero, perchè poi la volgio colorare nel codice sotto
+    
+    
+     myGroups.on('mouseenter', function(){
+        
+            // non scrivo d3.select(this) perchè d3 è un gruppo, devo dirgli l'elemento del gruppo che voglio cambiare
+            
+            d3.select(this)
+                .select('text')
+            
+           .attr('opacity',1)
+              
+            //se voglio animare la grandezza dei cerchi e colore faccio un altro d3.select
+             //.select('circle')
+            //.attr('fill', 'green')
+                //.attr('r', 10)
+            
+            })
+     
+     
+        myGroups.on('mouseleave', function(){
+        
+            d3.select(this)
+               
+            .select('text')
+            .attr('opacity',0)
+                        
+             //.select('circle')
+             //.attr('fill', 'black')
+           // .attr('r', 10)
+            
+            
+            })
+    
+    
+    
+    
+    
+    </script>
+    </body>
+
+
+</html>

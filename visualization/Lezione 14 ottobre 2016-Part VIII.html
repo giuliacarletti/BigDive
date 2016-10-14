@@ -1,0 +1,77 @@
+<html>
+<head>
+   <script  src="d3.v3.min.js">   </script> 
+   
+    </head>
+
+<body> 
+    
+   <svg > </svg> 
+    
+    <script>
+    
+   d3.csv('athletes_sochi.csv', function(data){
+       
+    
+    
+   var byCountry = d3.nest()
+   .key(function(d,i){
+       return d.country
+   })
+   .entries(data) 
+   
+   console.log(byCountry) 
+   
+   
+   byCountry.sort(function(a,b){
+       return d3.descending(a.values.length, b.values.length)
+   })
+   
+   
+   
+   //devo sapere il min numero di atleti di un paese, e max num:
+   var min = d3.min(byCountry, function(d,i){
+                return d.values.length    
+                    })
+   
+   var max = d3.max(byCountry, function(d,i){
+                return d.values.length    
+                    })
+   
+   //console.log(min,max)
+   //le dimensioni di default sono [0,150] per l'altezza, [0,300] per la larghezza
+   
+   //serve per scalare, così non ho istogrammi che escono fuori dello spazio
+   
+var bar_width = 300 / byCountry.length   
+
+
+   var myScale = d3.scale.linear()
+   .domain([min,max])
+   .range([0,150])
+   
+   
+    d3.select('svg')
+    .selectAll('rect')
+   .data(byCountry)
+   .enter()
+   .append('rect')
+   .attr('width', bar_width - 1)
+    //ho messo -1 così distanzio le barre le une dalle altre di 1
+    .attr('height', function(d,i){
+        return myScale(d.values.length)
+    })
+    
+    .attr('x', function(d,i){
+        return i*bar_width
+    })
+    
+    
+     })
+    
+    
+    </script>
+    </body>
+
+
+</html>
