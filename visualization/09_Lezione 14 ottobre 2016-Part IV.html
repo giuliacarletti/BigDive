@@ -17,13 +17,15 @@
     
     
     var newData = dataset.filter(function(d){
-        return d.age < 10       
+        return parseInt(d.age) < 10       
     })
     
     
     //il sort modifica la variabile, invece il filter crea una nuova var, quindi metto var newData = .....
     console.log(dataset)
     console.log(newData)
+    // queste due console mettono il dataset e il nuovo dataset con solo le age < 10 nella finestra della console
+    
     
     d3.select('svg')
         .selectAll('rect')
@@ -31,8 +33,8 @@
         .enter()
         .append('rect')
         .attr('width', 5)
-        .attr('heigth', function(d,i){
-        return d;
+        .attr('height', function(d,i){
+        return d.age;
     })
     
     .attr('x', function(d,i){

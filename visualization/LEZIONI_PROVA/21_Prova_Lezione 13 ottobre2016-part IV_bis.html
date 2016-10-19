@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    
+
+   <script 
+            src="d3.v3.min.js">
+   </script>         
+</head>
+
+ 
+<body> 
+    
+    <svg height = "10000"> </svg>
+    
+<!--
+L'svg che risulta è uno spazio 300 x 10.000 (se metto height=100, mi dà uno spazio 300 x 100 e non visualizzo tutti 
+   gli istogrammi)
+    
+-->
+    <script>
+   
+        
+d3.csv('athletes_sochi.csv', 
+    function (data) {
+    console.log(data)
+    
+
+    
+//    d3.select('svg')
+//        .selectAll('rect')
+//        .data(data)
+//        .enter()
+//        .append('rect')
+//        .attr('width', function(d,i){
+//            return d.age
+//    })
+//             
+//             
+//        .attr('height', 5)
+//        .attr('y', function(d,i) {
+//              return i*6
+//              
+//              })    
+//        })
+//    
+    
+    // le barre hanno width pari all'AGE e height tutti 5:
+    // per mettere le barre una sotto l'altra: la prima parte da 0, la seconda da 6 (5+1), la terza da 12 (5+6+1)
+
+    //enter(): se non trova l'array va ad append
+    //per ogni oggetto nell'array crea un rect (rettangolo)
+    //per mettere un rettangolo nell'svg devo usare append
+    
+    
+    //console.log(data[0].age)
+    
+   d3.select('svg')
+        .selectAll('circle')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('r', function(d,i){
+            return 2
+    })
+        
+       .attr('cx', function(d,i){
+            return d.weight *2
+    }) 
+        
+        .attr('cy', function(d,i){
+            return d.height *100
+    }) 
+        
+        .attr('opacity', .1)
+        
+                
+    })
+
+
+   
+    //console.log('hey')
+    
+    
+    </script>
+    
+    </body>
+    
+</html>

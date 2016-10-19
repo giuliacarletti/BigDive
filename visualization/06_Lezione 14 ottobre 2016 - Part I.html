@@ -34,24 +34,21 @@
  
     // questo mi serve per mettere label agli istogrammi
     
-d3.select('svg')
-    .selectAll('text')
-    .data(dataset)
-    .enter()
-    .append('text')
-    .attr('width', 25)
-    .attr('height', function(d,i) {
-        return d   
-    })
-    
-    .attr('x', function(d,i){
-        return i*26 
-    })
-    
-    .attr('y', function(d,i){
-        return 100-d 
-    })
-    
+            d3.select('svg')
+                .selectAll('text')
+                .data(dataset)
+                .enter()
+                .append('text')
+                .text(function(d, i){
+                    return d
+                })
+                .attr('x', function(d, i){
+                    return i*26
+                })
+                .attr('y', function(d, i){
+                    return 100 - d
+                })
+        
  
     
     

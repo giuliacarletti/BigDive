@@ -1,0 +1,134 @@
+<html>
+
+<head>
+   <script 
+            src="d3.v3.min.js">
+        
+        </script> 
+
+</head>
+
+
+    <body>
+    
+    
+    <!--<svg>
+        
+        <rect width = "40" height ="80" y ="30"> </rect>
+        
+         <rect width = "40" height ="50" y ="60" x="45"> </rect>
+        
+         <rect  width = "40" height ="100" y ="10"  x= "90"> </rect>
+        
+        </svg>
+    -->
+    
+        
+         <svg>
+        
+        </svg>
+              
+             
+        
+    <script>
+        
+        
+        d3.select('svg')
+        .attr('width', 500)
+        .attr('height', 500)
+        
+        //PRIMA COLONNA
+            
+        d3.select('svg')    
+        .append('rect')
+        .attr('width', 40)
+        .attr('height', 0)
+        .attr('y', 110)
+        .transition()   
+        .duration(2000)
+        .ease('bounce')
+        .attr('height', 80)
+        .attr('y', 30)
+        
+        
+        //SECONDA COLONNA
+        
+       var myRect = d3.select('svg')    
+        .append('rect')
+        .attr('width', 40)
+        .attr('height', 50)
+        .attr('y', 60)
+        .attr('x', 45)
+       
+       myRect.transition()   
+      .duration(2000)
+        .delay(500)
+        .attr('height', 50)
+        .attr('y', 60)
+       .attr('fill', 'orange')
+          
+       
+        myRect.on('click', function(){
+        
+            d3.select(this)
+            .transition()
+            .duration(2000)
+            .attr('fill', 'red')
+                         })
+            
+            console.log('hey')
+            
+       
+        myRect.on('mouseenter', function(){
+        
+            d3.select(this)
+            .transition()
+            .duration(2000)
+            .attr('fill', 'red')
+                         })
+        
+        myRect.on('mouseleave', function(){
+        
+            d3.select(this)
+            .transition()
+            .duration(2000)
+            .attr('fill', 'green')
+                         })
+       
+        
+//        //TERZA COLONNA
+        
+         var myRect2 = d3.select('svg') 
+          
+        .append('rect')
+        .attr('width', 40)
+        .attr('height', 0)
+        .attr('stroke', 'red')
+        //.attr('stroke-width', 4)
+        .attr('y', 110)
+        .attr('x', 90)
+         
+         myRect2.transition()  
+        .duration(2000)
+        .delay(1000)
+        .attr('height', 100)
+        .attr('y', 10)
+        
+         myRect2.on('click', function(){
+        
+            d3.select(this)
+            .transition()
+            .duration(2000)
+            .attr('fill', 'blue')
+                         })
+            
+            
+            </script> 
+            
+    
+    
+    </body>
+
+
+
+</html>

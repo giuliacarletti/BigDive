@@ -28,11 +28,11 @@
     .enter()
     .append('g')
     .attr('transform', function(d,i){
-        return 'translate(' + (i*21 +10) + ', ' + (d+10) + ' )'
+        return 'translate(' + (i*21+20) + ', ' + (d+10) + ' )'
     })
        
 // (d+10) mi trasla tutti i cerchi verso il basso di 10; devo mettere l'espressione tra parentesi, altrim + non lo riconosce    
-   // i*21 + 10 mi ingrandisce di 21 e sposta di 10
+   // i*21 + 20 mi ingrandisce di 21 e sposta di 20
     
     //translate () mi dice di quanto si spostano la ordinata e l'ascissa del gruppo (d,i)
     
@@ -62,7 +62,7 @@
             })
     .attr('opacity',0)
     
-    //la opacity di default è 1, qui la metto a zero, perchè poi la volgio colorare nel codice sotto
+    //la opacity di default è 1, qui la metto a zero, perchè poi la voglio colorare nel codice sotto
     
     
      myGroups.on('mouseenter', function(){

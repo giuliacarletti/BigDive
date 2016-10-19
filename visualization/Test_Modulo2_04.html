@@ -1,0 +1,52 @@
+<html>
+
+    <head>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+    </head>
+
+    <body>
+        
+        <svg id="miosvg" width="500" height="300">
+            
+        </svg>
+        
+        <script>
+            
+            d3.select('#miosvg')
+                .attr('width', 500)
+                .attr('height', 500)
+            
+            
+            
+            var rects = d3.select('svg')
+                .selectAll('rect')
+                .data(data)
+                .enter()
+                .append('rect')
+                .attr('height', function(d,i){
+                    return d
+                })
+                .attr('width', 5)
+                .attr('x', function(d,i){
+                    return i*6
+                })
+            
+                .attr('y', function(d,i){
+                    return 100-d
+                })
+            
+                .attr('opacity', 0)
+                .transition()
+                .duration(2500)
+                .ease('bounce')
+                .delay(function(d,i){
+                    return 100*i
+                })
+                .attr('opacity', 1)
+                .attr('x', 100)
+        
+        </script>
+    
+    </body>
+    
+</html>
