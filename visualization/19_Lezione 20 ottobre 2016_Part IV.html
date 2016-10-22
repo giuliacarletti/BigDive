@@ -1,0 +1,90 @@
+<html>
+
+    <head>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+    
+   
+    </head>
+
+    
+    <body>
+    
+      <svg>     </svg>  
+    
+    
+    <script>
+    
+        var data = d3.range(20).map(function(){
+            return Math.random()
+        })
+        
+        var mapx = d3.scale.linear()
+            .domain([0,20])
+            .range([0,300])
+        //mi converte un range di 0-20 in 0-300 (potrei anche fare 0-200)
+        
+        
+        var mapy = d3.scale.linear()
+            .domain([0,1])
+            .range([0,50])
+        //la variabile y va da 0 a 1; qui la faccio diventare da 0 a 50
+        
+        var genline = d3.svg.area()
+                    .x(function(d,i){
+                        return mapx(i)
+                    })
+        
+                    .y1(function(d,i){
+                        return mapy(d)
+                    })
+                    
+                    .y0(function(d,i){
+                        return 150
+                    })
+                    //metto la y0 che mi serve per definire quanto voglio alta la y. Per x non serve, va in automatico
+        
+                    .interpolate('basis')
+        
+        // return   i*10 è per aumentare la scala (0,10,20...)
+        //d*100 aumenta la dimensione dell'asse y, altrimenti sarebbe d, e cioè 1 (1 pixel)
+       
+        
+        
+        
+        var myPath = d3.select('svg')
+                    .append('path')
+        
+        
+        
+        function draw(data){
+        
+        
+         myPath.transition()   
+        .attr('d', genline(data))
+        //.attr('fill', 'none')   
+        //.attr('stroke', 'purple')
+        
+        }
+        
+        d3.select('svg').on('click', function(){
+            var data = d3.range(20).map(function(){  
+                return Math.random()
+            })
+            
+            var maxVal = d3.max(data, function(d,i){
+                return d
+            })
+            
+            console.log(maxVal)
+            
+            draw(data)
+            })
+        
+        
+        </script>
+    
+    
+    
+    </body>
+
+</html>

@@ -1,0 +1,168 @@
+<html>
+
+    <head>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+    
+    <style>
+        .axis line, .axis path{
+            fill:none;
+            stroke:black
+        }
+    
+/*
+    do il colore black a tutte le linee e tutti i path che hanno come specifica axis (quindi quando sotto 
+        definisco gli assi x e y) e non a tutto il doc
+*/
+        
+        
+    </style>
+    </head>
+
+    
+    <body>
+    
+      <svg>
+    
+          
+        </svg>  
+    
+    
+    <script>
+        
+       d3.csv('athletes_sochi.csv', function(data){
+       
+    function maleSum(arr){
+        var somma = d3.sum(arr, function(d,i){
+            return (d.gender == 'Male') ? 1: 0
+        })
+        return somma
+        }
+       
+       
+       // ? 1:0 vuol dire then gender=Male metti 1, altrimenti 0 (e il sum sopra serve per sommare tutti i Male del ciclo)
+       
+       function femaleSum(arr){
+        var somma = d3.sum(arr, function(d,i){
+            return (d.gender == 'Female') ? 1: 0
+        })
+        return somma
+        }
+        
+        
+    
+        
+        
+        
+        var axg = d3.select('svg')
+         .append('g')
+         .attr('class', 'axis')
+         .attr('transform', 'translate(0,150)')
+         //serve per traslare l'asse di 100 pixel vs il basso
+       
+       var ayg = d3.select('svg')
+         .append('g')
+         .attr('class', 'axis')
+         .attr('transform', 'translate(280,10)')
+       
+       
+    
+       function draw(data){
+           
+    
+       
+       var circle = d3.select('svg')
+       .selectAll('circle')
+       .data(data)
+       
+       var mapX = d3.scale.linear()
+        .domain([0, data.length])
+        .range ([20,280])
+       // al posto di[0,300], in quanto il primo cerchio veniva tagliato
+       
+       
+       var mapY = d3.scale.linear()
+        .domain([data.length,0])
+        .range ([20,130])
+       
+       
+       //metto l'asse x
+      var ax = d3.svg.axis()
+          .orient('top')
+          .scale(mapX)
+    
+          axg.transition()
+          .call(ax)
+      
+       //metto l'asse y
+          var ay = d3.svg.axis()
+          .orient('right')
+          .scale(mapY)
+       
+          ayg.transition()
+          .call(ay)
+          
+          
+          
+          
+       //ENTER BLOCK
+       circle.enter()
+       .append('circle')
+       .attr('cx',0)
+       .attr('cy', 40)
+       .attr('r', 0)
+       
+       //EXIT BLOCK
+        circle.exit()
+        .transition()
+        .attr('cy',0)
+        .remove()
+        //i cerchi che rimuove li mette su, quindi cy=0
+        
+        
+        
+//        //UPDATE BLOCK
+//        circle.transition()
+//       .duration(2000)
+//       .delay(function(d,i){
+//           return i*100
+//       })
+//       
+//       .attr('r', function(d,i){
+//           return d*10
+//       })
+//        
+//        .attr('cx', function(d,i){
+//           return mapX(i)
+//       })
+//        
+//        }
+//       
+//       
+//       d3.select('svg')
+//       .on('click', function() {
+//          
+//        var l = parseInt(Math.random()*20) +3 
+//        var data = d3.range(l).map(function(){
+//           return Math.random()
+//       })
+        
+        //min numero di cerchi è 3, massimo numero 23
+       //invece di avere da 0 a 30, gli do una funzione di numeri randomici
+        
+        //rendo random anche l'array: non è più 30
+        
+       //metto il dataset dentro la funzione, in modo che sia generato dinamicamente ogni volta che chiamo la funzione       
+       //ogni volta che clicco viene generato un dataset
+        
+        draw (data)  
+      
+       })
+       
+       
+        </script>
+    
+    
+    
+    </body>
+
+</html>
