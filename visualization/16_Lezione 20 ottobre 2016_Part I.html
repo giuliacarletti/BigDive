@@ -121,30 +121,30 @@
         
         
 //        //UPDATE BLOCK
-//        circle.transition()
-//       .duration(2000)
-//       .delay(function(d,i){
-//           return i*100
-//       })
-//       
-//       .attr('r', function(d,i){
-//           return d*10
-//       })
-//        
-//        .attr('cx', function(d,i){
-//           return mapX(i)
-//       })
-//        
-//        }
-//       
-//       
-//       d3.select('svg')
-//       .on('click', function() {
-//          
-//        var l = parseInt(Math.random()*20) +3 
-//        var data = d3.range(l).map(function(){
-//           return Math.random()
-//       })
+        circle.transition()
+       .duration(2000)
+       .delay(function(d,i){
+           return i*100
+       })
+       
+       .attr('r', function(d,i){
+           return d*10
+       })
+        
+        .attr('cx', function(d,i){
+           return mapX(i)
+       })
+        
+        }
+       
+       
+       d3.select('svg')
+       .on('click', function() {
+          
+        var l = parseInt(Math.random()*20) +3 
+        var data = d3.range(l).map(function(){
+           return Math.random()
+       })
         
         //min numero di cerchi è 3, massimo numero 23
        //invece di avere da 0 a 30, gli do una funzione di numeri randomici
