@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="lib/d3.v3.min.js"></script>
+        <script src="http://d3js.org/topojson.v1.min.js"></script>        
+        <style>
+            .selected {stroke:blue; stroke-width: 3px;}
+        </style>
+    </head>
+    <body>
+
+        <div id="column">
+            <h1>Vista per provincia di % aziende in default e dettaglio categorie ATECO</h1>
+            <h4>Dati estratti dal training set</h4>
+            <p>Angelica Castellano, Giuseppe D'Agostino, Stefania Piosso, Marco Vita</p>
+            <svg>
+                <text id="provincia" y=50 x=350></text>
+                <text id="0" class="txt_ateco" y=100 x=350></text>
+                <text id="1" class="txt_ateco" y=120 x=350></text>
+                <text id="2" class="txt_ateco" y=140 x=350></text>
+            </svg>
+            <p id="provincia" ></p>
+
+        </div>
+        <script src="app.js"></script>
+    </body>
+
+</html>
